@@ -25,7 +25,7 @@ class HarvestController extends Controller
     /**
      * Ajouter une recolte
      *
-     *@bodyParam weight_coton integer required poids de coton
+     * @bodyParam weight_coton integer required poids de coton
      * @bodyParam price_unit integer required prix unitaire d'un poid de coton
      * @bodyParam date date required date de recolte
      * @bodyParam observation string required obsertion de recolte
@@ -87,11 +87,11 @@ class HarvestController extends Controller
     /**
      * Modifier une recolte
      *
-     *@bodyParam name string required nom de champs
-     * @bodyParam location string required lieux de champs
-     * @bodyParam surface integer required superficie du champs
+     * @bodyParam weight_coton integer required poids de coton
+     * @bodyParam price_unit integer required prix unitaire d'un poid de coton
      * @bodyParam date date required date de recolte
      * @bodyParam observation string required obsertion de recolte
+     * @authenticated
      *
      * @authenticated
      *
@@ -131,7 +131,7 @@ class HarvestController extends Controller
     }
 
     /**
-     * Supprimer un champ
+     * Supprimer une recolte
      * @authenticated
      *
      * @param  int  $id

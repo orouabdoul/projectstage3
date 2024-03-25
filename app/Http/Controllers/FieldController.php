@@ -17,7 +17,7 @@ class FieldController extends Controller
     {
 
         $fields = Field::join('users', 'fields.user_id', '=', 'users.id')
-        ->select('fields.id as field_id', 'fields.name', 'fields.location', 'fields.surface','fields.user_id', 'users.id as user_id', 'users.first_name as user_first_name',
+        ->select('fields.id as field_id', 'fields.name', 'fields.location', 'fields.surface', 'fields.observation', 'fields.user_id', 'users.id as user_id', 'users.first_name as user_first_name',
          'users.last_name as user_last_name')->get();
 
 
@@ -28,9 +28,10 @@ class FieldController extends Controller
     /**
      * Ajouter un champs
      *
-    *@bodyParam name string required nom de champs
+     * @bodyParam name string required nom de champs
      * @bodyParam location string required lieux de champs
      * @bodyParam surface integer required superficie du champs
+     * @bodyParam observation string required observation du champs
      * @authenticated
      *
      * @param  \Illuminate\Http\Request  $request
@@ -43,6 +44,7 @@ class FieldController extends Controller
             'name' => 'required|string',
             'location' => 'required|string',
             'surface' => 'required|integer',
+            'observation' => 'required|string',
             'user_id' => 'required|integer|exists:users,id',
         ];
 
@@ -95,6 +97,7 @@ class FieldController extends Controller
      *@bodyParam name string required nom de champs
      * @bodyParam location string required lieux de champs
      * @bodyParam surface integer required superficie du champs
+     * @bodyParam observation string required observation du champs
      * @authenticated
      *
      * @param  \Illuminate\Http\Request  $request
@@ -107,6 +110,7 @@ class FieldController extends Controller
             'name' => 'required|string',
             'location' => 'required|string',
             'surface' => 'required|integer',
+            'observation' => 'required|string',
             'user_id' => 'required|integer|exists:users,id',
         ];
 

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
     /**
-     * Liste des banques
+     * Liste des roles
      * @authenticated
      *
      * @return \Illuminate\Http\Response
@@ -59,7 +59,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Récupérer les informations d'une banque
+     * Récupérer les informations d'un role
      * @authenticated
      *
      * @param  int  $id
@@ -98,7 +98,7 @@ class RoleController extends Controller
         $request ->merge([
             'name'=>  ucfirst(strtolower($request->name)),
         ] );
-        
+
         $role = Role::find($id);
 
         if ($role) {

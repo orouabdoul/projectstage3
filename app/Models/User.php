@@ -31,6 +31,11 @@ class User extends Authenticatable
          'role_id'
     ];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public function fields()
     {
         return $this->hasMany(Field::class);

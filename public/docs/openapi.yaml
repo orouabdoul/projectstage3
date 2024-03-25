@@ -1,0 +1,816 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/role:
+    get:
+      summary: 'Liste des roles'
+      operationId: listeDesRoles
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  body: []
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  body:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+    post:
+      summary: 'Ajouter un role'
+      operationId: ajouterUnRole
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'nom de role'
+                  example: dolorum
+              required:
+                - name
+  '/api/role/{id}':
+    get:
+      summary: "Récupérer les informations d'un role"
+      operationId: rcuprerLesInformationsDunRole
+      description: ''
+      parameters: []
+      responses:
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'role not found.'
+                  body: []
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'role not found.'
+                  body:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+    put:
+      summary: 'Modifier un role'
+      operationId: modifierUnRole
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'nom de role'
+                  example: officiis
+              required:
+                - name
+    delete:
+      summary: 'Supprimer un role'
+      operationId: supprimerUnRole
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the role.'
+        example: 7
+        required: true
+        schema:
+          type: integer
+  /api/user:
+    get:
+      summary: 'Liste des utilisateurs'
+      operationId: listeDesUtilisateurs
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  body: []
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  body:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+    post:
+      summary: 'Ajouter un utilisateur'
+      operationId: ajouterUnUtilisateur
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: prenom
+                  example: necessitatibus
+                last_name:
+                  type: string
+                  description: nom
+                  example: sit
+                sexe:
+                  type: required
+                  description: sexe
+                  example: cum
+                phone:
+                  type: integer
+                  description: 'numero telephone'
+                  example: 19
+                department:
+                  type: string
+                  description: departement
+                  example: nam
+                common:
+                  type: string
+                  description: commune
+                  example: ea
+                borough:
+                  type: string
+                  description: arrondissement
+                  example: animi
+                neighborhood:
+                  type: string
+                  description: quartier
+                  example: et
+                password:
+                  type: string
+                  description: 'mot de passe'
+                  example: ';V._[smCf'
+                role_id:
+                  type: integer
+                  description: ''
+                  example: 15
+              required:
+                - first_name
+                - last_name
+                - phone
+                - department
+                - common
+                - borough
+                - neighborhood
+                - password
+                - role_id
+  '/api/user/{id}':
+    get:
+      summary: "Récupérer les informations d'un utilisateur"
+      operationId: rcuprerLesInformationsDunUtilisateur
+      description: ''
+      parameters: []
+      responses:
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'user not found.'
+                  body: []
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'user not found.'
+                  body:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+    put:
+      summary: 'Modifier un utilisateur'
+      operationId: modifierUnUtilisateur
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: prenom
+                  example: ducimus
+                last_name:
+                  type: string
+                  description: nom
+                  example: quidem
+                sexe:
+                  type: required
+                  description: sexe
+                  example: voluptatum
+                phone:
+                  type: integer
+                  description: 'numero telephone'
+                  example: 6
+                department:
+                  type: string
+                  description: departement
+                  example: expedita
+                common:
+                  type: string
+                  description: commune
+                  example: tempora
+                borough:
+                  type: string
+                  description: arrondissement
+                  example: tempora
+                neighborhood:
+                  type: string
+                  description: quartier
+                  example: et
+                password:
+                  type: string
+                  description: 'mot de passe'
+                  example: 'coKde:UM2'
+                role_id:
+                  type: integer
+                  description: ''
+                  example: 12
+              required:
+                - first_name
+                - last_name
+                - phone
+                - department
+                - common
+                - borough
+                - neighborhood
+                - password
+                - role_id
+    delete:
+      summary: 'Supprimer un utilisateur'
+      operationId: supprimerUnUtilisateur
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the user.'
+        example: 17
+        required: true
+        schema:
+          type: integer
+  /api/field:
+    get:
+      summary: 'Liste des champs'
+      operationId: listeDesChamps
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  body: []
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  body:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+    post:
+      summary: 'Ajouter un champs'
+      operationId: ajouterUnChamps
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'nom de champs'
+                  example: rerum
+                location:
+                  type: string
+                  description: 'lieux de champs'
+                  example: itaque
+                surface:
+                  type: integer
+                  description: 'superficie du champs'
+                  example: 6
+                observation:
+                  type: string
+                  description: 'observation du champs'
+                  example: omnis
+                user_id:
+                  type: integer
+                  description: ''
+                  example: 6
+              required:
+                - name
+                - location
+                - surface
+                - observation
+                - user_id
+  '/api/field/{id}':
+    get:
+      summary: "Récupérer les informations d'un champ"
+      operationId: rcuprerLesInformationsDunChamp
+      description: ''
+      parameters: []
+      responses:
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'field not found.'
+                  body: []
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'field not found.'
+                  body:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+    put:
+      summary: 'Modifier un champ'
+      operationId: modifierUnChamp
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'nom de champs'
+                  example: totam
+                location:
+                  type: string
+                  description: 'lieux de champs'
+                  example: id
+                surface:
+                  type: integer
+                  description: 'superficie du champs'
+                  example: 13
+                observation:
+                  type: string
+                  description: 'observation du champs'
+                  example: recusandae
+                user_id:
+                  type: integer
+                  description: ''
+                  example: 15
+              required:
+                - name
+                - location
+                - surface
+                - observation
+                - user_id
+    delete:
+      summary: 'Supprimer un champ'
+      operationId: supprimerUnChamp
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the field.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/product:
+    get:
+      summary: 'Liste des produits'
+      operationId: listeDesProduits
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  body: []
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  body:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+    post:
+      summary: 'Ajouter un produit'
+      operationId: ajouterUnProduit
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'nom de produit'
+                  example: reiciendis
+                type_product:
+                  type: string
+                  description: 'type de produit'
+                  example: omnis
+                quantity:
+                  type: integer
+                  description: 'nombre de produit'
+                  example: 19
+                price_unit:
+                  type: integer
+                  description: "prix unitaire d'un produit"
+                  example: 13
+                description:
+                  type: string
+                  description: 'description du produit'
+                  example: 'Amet qui ut ut error porro.'
+                user_id:
+                  type: integer
+                  description: ''
+                  example: 7
+              required:
+                - name
+                - type_product
+                - quantity
+                - price_unit
+                - description
+                - user_id
+  '/api/product/{id}':
+    get:
+      summary: "Récupérer les informations d'un produit"
+      operationId: rcuprerLesInformationsDunProduit
+      description: ''
+      parameters: []
+      responses:
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'product not found.'
+                  body: []
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'product not found.'
+                  body:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+    put:
+      summary: 'Modifier un produit'
+      operationId: modifierUnProduit
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'nom de produit'
+                  example: ullam
+                type_product:
+                  type: string
+                  description: 'type de produit'
+                  example: est
+                quantity:
+                  type: integer
+                  description: 'nombre de produit'
+                  example: 10
+                price_unit:
+                  type: integer
+                  description: "prix unitaire d'un produit"
+                  example: 5
+                description:
+                  type: string
+                  description: 'description du produit'
+                  example: 'Enim quae iste sunt voluptatem omnis consequuntur laboriosam.'
+                user_id:
+                  type: integer
+                  description: ''
+                  example: 2
+              required:
+                - name
+                - type_product
+                - quantity
+                - price_unit
+                - description
+                - user_id
+    delete:
+      summary: 'Supprimer un produit'
+      operationId: supprimerUnProduit
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the product.'
+        example: 6
+        required: true
+        schema:
+          type: integer
+  /api/harvest:
+    get:
+      summary: 'Liste des recoltes'
+      operationId: listeDesRecoltes
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  body: []
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  body:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+    post:
+      summary: 'Ajouter une recolte'
+      operationId: ajouterUneRecolte
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                weight_coton:
+                  type: integer
+                  description: 'poids de coton'
+                  example: 4
+                price_unit:
+                  type: integer
+                  description: "prix unitaire d'un poid de coton"
+                  example: 2
+                date:
+                  type: date
+                  description: 'date de recolte'
+                  example: nemo
+                observation:
+                  type: string
+                  description: 'obsertion de recolte'
+                  example: minus
+                field_id:
+                  type: integer
+                  description: ''
+                  example: 18
+              required:
+                - weight_coton
+                - price_unit
+                - date
+                - observation
+                - field_id
+  '/api/harvest/{id}':
+    get:
+      summary: "Récupérer les informations d'une recolte"
+      operationId: rcuprerLesInformationsDuneRecolte
+      description: ''
+      parameters: []
+      responses:
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'harvest not found.'
+                  body: []
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'harvest not found.'
+                  body:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+    put:
+      summary: 'Modifier une recolte'
+      operationId: modifierUneRecolte
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                weight_coton:
+                  type: integer
+                  description: 'poids de coton'
+                  example: 19
+                price_unit:
+                  type: integer
+                  description: "prix unitaire d'un poid de coton"
+                  example: 14
+                date:
+                  type: date
+                  description: 'date de recolte'
+                  example: id
+                observation:
+                  type: string
+                  description: 'obsertion de recolte'
+                  example: maiores
+                field_id:
+                  type: integer
+                  description: ''
+                  example: 1
+              required:
+                - weight_coton
+                - price_unit
+                - date
+                - observation
+                - field_id
+    delete:
+      summary: 'Supprimer une recolte'
+      operationId: supprimerUneRecolte
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the harvest.'
+        example: 5
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Endpoints
+    description: ''

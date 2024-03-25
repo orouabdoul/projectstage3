@@ -14,11 +14,11 @@ class Product extends Model
              'quantity',
              'price_unit',
              'description',
-             'field_id'
+             'user_id'
     ];
 
     public function field()
     {
-        return $this->belongsTo(Field::class);
+        return $this->belongsTo(User::class);
     }
 }

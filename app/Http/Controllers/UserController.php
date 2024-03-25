@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
    /**
-     * Liste des recoltes
+     * Liste des utilisateurs
      * @authenticated
      *
      * @return \Illuminate\Http\Response
@@ -83,7 +83,7 @@ class UserController extends Controller
     }
 
     /**
-     * Récupérer les informations d'une recolte
+     * Récupérer les informations d'un utilisateur
      * @authenticated
      *
      * @param  int  $id
@@ -161,7 +161,7 @@ class UserController extends Controller
     }
 
     /**
-     * Supprimer un champ
+     * Supprimer un utilisateur
      * @authenticated
      *
      * @param  int  $id

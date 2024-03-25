@@ -8,22 +8,22 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
-     * Liste des intrants
+     * Liste des produits
      * @authenticated
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $products = Product::join('fields', 'products.field_id', '=', 'fields.id')
-        ->select('products.id as product_id', 'products.name', 'products.type_product', 'products.quantity', 'products.price_unit', 'products.description', 'products.field_id', 'fields.id as field_id', 'fields.name as field_name', 'fields.location as field_location')
+        $products = Product::join('users', 'products.user_id', '=', 'users.id')
+        ->select('products.id as product_id', 'products.name', 'products.type_product', 'products.quantity', 'products.price_unit', 'products.description', 'products.user_id', 'users.id as user_id', 'users.first_name as user_firstname', 'users.last_name as user_lastname')
         ->get();
 
         return self::apiResponse(true, "", $products);
     }
 
     /**
-     * Ajouter un intrant
+     * Ajouter un produit
      *
      *@bodyParam name string required nom de produit
      * @bodyParam type_product string required type de produit
@@ -45,7 +45,7 @@ class ProductController extends Controller
             'quantity' => 'required|integer',
             'price_unit' => 'required|integer',
             'description' => 'required|string',
-            'field_id' => 'required|integer|exists:fields,id',
+            'user_id' => 'required|integer|exists:users,id',
         ];
 
         $request->validate($rules);
@@ -73,7 +73,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Récupérer les informations d'une recolte
+     * Récupérer les informations d'un produit
      * @authenticated
      *
      * @param  int  $id
@@ -91,7 +91,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Modifier un intrant
+     * Modifier un produit
      *
      * @bodyParam name string required nom de produit
      * @bodyParam type_product string required type de produit
@@ -113,7 +113,7 @@ class ProductController extends Controller
             'quantity' => 'required|integer',
             'price_unit' => 'required|integer',
             'description' => 'required|string',
-            'field_id' => 'required|integer|exists:fields,id',
+            'user_id' => 'required|integer|exists:users,id',
         ];
 
         $request->validate($rules);
@@ -142,7 +142,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Supprimer un intrant
+     * Supprimer un produit
      * @authenticated
      *
      * @param  int  $id

@@ -12,13 +12,11 @@ class Field extends Model
              'name',
              'location',
              'surface',
+             'observation',
              'user_id'
     ];
 
-    public function inputs()
-    {
-        return $this->hasMany(Input::class);
-    }
+
 
     public function harvests()
     {
