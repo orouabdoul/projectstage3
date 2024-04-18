@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -13,14 +17,31 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
+    try {
         $users = User::join('roles', 'users.role_id', '=', 'roles.id')
-        ->select('users.id as user_id', 'users.first_name', 'users.last_name', 'users.sexe', 'users.phone', 'users.department','users.common', 'users.borough','users.neighborhood', 'users.role_id', 'roles.id as role_id', 'roles.name as role_name')
-        ->get();
+            ->select(
+                'users.id as user_id',
+                'users.first_name',
+                'users.last_name',
+                'users.sexe',
+                'users.phone',
+                'users.department',
+                'users.common',
+                'users.borough',
+                'users.neighborhood',
+                'users.role_id',
+                'roles.id as role_id',
+                'roles.name as role_name'
+            )
+            ->get();
 
-        return self::apiResponse(true, "", $users);
+        return self::apiResponse(true, "Users retrieved successfully", $users);
+    } catch (\Exception $e) {
+        return self::apiResponse(false, "Failed to retrieve users: " . $e->getMessage(), null, 500);
     }
+}
+
 
     /**
      * Ajouter un utilisateur
@@ -100,6 +121,53 @@ class UserController extends Controller
         }
     }
 
+    public function loginUser(Request $request): Response
+    {
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response(['message' => $validator->errors()], 401);
+        }
+
+        if (Auth::attempt($request->all())) {
+            $user = Auth::user();
+            $token = $user->createToken('MyApp')->plainTextToken;
+
+            return response(['token' => $token, 'data' => $user, ], 200);
+        }
+
+        return response(['message' => 'Phone or password is wrong'], 401);
+    }
+
+    /**
+     * Get details of authenticated user.
+     */
+    public function userDetails(): Response
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            return response(['data' => $user], 200);
+        }
+
+        return response(['data' => 'Unauthorized'], 401);
+    }
+
+    /**
+     * Logout authenticated user.
+     */
+    public function logout(): Response
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user->currentAccessToken()->delete();
+            return response(['data' => 'User logged out successfully.'], 200);
+        }
+
+        return response(['data' => 'Unauthorized'], 401);
+    }
     /**
      * Modifier un utilisateur
      *
