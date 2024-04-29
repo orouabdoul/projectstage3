@@ -56,14 +56,6 @@ class FieldController extends Controller
         ] );
 
 
-        // Verify if field already exists
-        $exist_field = Field::where('name', $request->name)->orWhere('location', $request->location)->first();
-
-
-        if($exist_field){
-            return self::apiResponse(false, "This field already exists.", [], 400);
-        }
-
         $field = Field::create($request->all());
 
         if($field) {

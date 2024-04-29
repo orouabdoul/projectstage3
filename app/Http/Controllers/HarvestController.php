@@ -47,16 +47,6 @@ class HarvestController extends Controller
 
         $request->validate($rules);
 
-
-
-        // Verify if harvest already exists
-        $exist_harvest = Harvest::where('weight_coton', $request->weight_coton)->first();
-
-
-        if($exist_harvest){
-            return self::apiResponse(false, "This harvest already exists.", [], 400);
-        }
-
         $harvest = Harvest::create($request->all());
 
         if($harvest) {

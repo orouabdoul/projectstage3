@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Harvest;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -30,6 +32,7 @@ class UserController extends Controller
                 'users.common',
                 'users.borough',
                 'users.neighborhood',
+                'users.password',
                 'users.role_id',
                 'roles.id as role_id',
                 'roles.name as role_name'
@@ -84,15 +87,6 @@ class UserController extends Controller
             'last_name' => strtoupper($request->last_name),
         ]);
 
-        // Verify if user already exists
-        $exist_user = User::where('first_name', $request->first_name)
-                        ->orWhere('last_name', $request->last_name)
-                        ->first();
-
-        if ($exist_user) {
-            return self::apiResponse(false, "This user already exists.", [], 400);
-        }
-
         $user = User::create($request->all());
 
         if ($user) {
@@ -142,6 +136,17 @@ class UserController extends Controller
         return response(['message' => 'Phone or password is wrong'], 401);
     }
 
+
+    public function user_bilan(Request $request)
+    {
+        try {
+            $users = User::with('products', 'fields.harvests')->get();
+            return self::apiResponse(true, "Users retrieved successfully", $users);
+        } catch (\Exception $e) {
+            return self::apiResponse(false, "Failed to retrieve users: " . $e->getMessage(), null, 500);
+        }
+    }
+
     /**
      * Get details of authenticated user.
      */
@@ -160,6 +165,7 @@ class UserController extends Controller
      */
     public function logout(): Response
     {
+
         if (Auth::check()) {
             $user = Auth::user();
             $user->currentAccessToken()->delete();

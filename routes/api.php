@@ -24,6 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('login',[UserController::class,'loginUser']);
+Route::get('bilan',[UserController::class,'user_bilan']);
+
+
 
 
 Route::group(['middleware' => 'auth:sanctum'],function(){

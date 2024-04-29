@@ -55,14 +55,6 @@ class ProductController extends Controller
             'type_product'=>  ucfirst(strtolower($request->type_product)),
         ] );
 
-        // Verify if product already exists
-        $exist_product = Product::where('name', $request->name)->orWhere('type_product', $request->type_product)->first();
-
-
-        if($exist_product){
-            return self::apiResponse(false, "This product already exists.", [], 400);
-        }
-
         $product = Product::create($request->all());
 
         if($product) {

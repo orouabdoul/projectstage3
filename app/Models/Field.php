@@ -9,7 +9,7 @@ class Field extends Model
 {
     use HasFactory;
     protected $fillable = [
-             'name',
+           'name',
              'location',
              'surface',
              'observation',
