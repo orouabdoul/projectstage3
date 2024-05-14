@@ -145,7 +145,209 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return self::apiResponse(false, "Failed to retrieve users: " . $e->getMessage(), null, 500);
         }
+        try {
+            // Logique pour récupérer les utilisateurs
+            return self::apiResponse(true, "Utilisateurs récupérés avec succès", $users);
+        } catch (\Exception $e) {
+            return self::apiResponse(false, "Échec de la récupération des utilisateurs: " . $e->getMessage(), null, 500);
+        }
     }
+
+            public function best_arrond(Request $request)
+        {
+            try {
+                // Récupérer tous les utilisateurs avec leurs champs et récoltes
+                $users = User::with('fields.harvests')->get();
+
+                // Grouper les utilisateurs par borough
+                $usersByBorough = $users->groupBy('borough');
+
+                // Initialiser le tableau des résultats
+                $result = [];
+
+                // Calculer le poids total des récoltes par borough et trier les utilisateurs
+                foreach ($usersByBorough as $borough => $users) {
+                    $totalWeight = $users->sum(function ($user) {
+                        return $user->fields->flatMap->harvests->sum('weight_coton');
+                    });
+
+                    // Trier les utilisateurs par le poids de leurs récoltes
+                    $topUsers = $users->sortByDesc(function ($user) {
+                        return $user->fields->flatMap->harvests->sum('weight_coton');
+                    })->take(3);
+
+                    // Ajouter les résultats pour ce borough
+                    $result[] = [
+                        'borough' => $borough,
+                        'totalWeight' => $totalWeight,
+                        'topUsers' => $topUsers
+                    ];
+                }
+
+                // Logique pour récupérer les utilisateurs
+                return self::apiResponse(true, "Utilisateurs récupérés avec succès", $result);
+            } catch (\Exception $e) {
+                return self::apiResponse(false, "Échec de la récupération des utilisateurs: " . $e->getMessage(), null, 500);
+            }
+        }
+
+
+        public function best_comm(Request $request)
+        {
+            try {
+                // Récupérer tous les utilisateurs avec leurs champs et récoltes
+                $users = User::with('fields.harvests')->get();
+
+                // Grouper les utilisateurs par borough
+                $usersBycommon = $users->groupBy('common');
+
+                // Initialiser le tableau des résultats
+                $result = [];
+
+                // Calculer le poids total des récoltes par common et trier les utilisateurs
+                foreach ($usersBycommon as $common => $users) {
+                    $totalWeight = $users->sum(function ($user) {
+                        return $user->fields->flatMap->harvests->sum('weight_coton');
+                    });
+
+                    // Trier les utilisateurs par le poids de leurs récoltes
+                    $topUsers = $users->sortByDesc(function ($user) {
+                        return $user->fields->flatMap->harvests->sum('weight_coton');
+                    })->take(3);
+
+                    // Ajouter les résultats pour ce common
+                    $result[] = [
+                        'common' => $common,
+                        'totalWeight' => $totalWeight,
+                        'topUsers' => $topUsers
+                    ];
+                }
+
+                // Logique pour récupérer les utilisateurs
+                return self::apiResponse(true, "Utilisateurs récupérés avec succès", $result);
+            } catch (\Exception $e) {
+                return self::apiResponse(false, "Échec de la récupération des utilisateurs: " . $e->getMessage(), null, 500);
+            }
+        }
+
+        public function best_depart(Request $request)
+        {
+            try {
+                // Récupérer tous les utilisateurs avec leurs champs et récoltes
+                $users = User::with('fields.harvests')->get();
+
+                // Grouper les utilisateurs par borough
+                $usersBydepartment = $users->groupBy('department');
+
+                // Initialiser le tableau des résultats
+                $result = [];
+
+                // Calculer le poids total des récoltes par department et trier les utilisateurs
+                foreach ($usersBydepartment as $department => $users) {
+                    $totalWeight = $users->sum(function ($user) {
+                        return $user->fields->flatMap->harvests->sum('weight_coton');
+                    });
+
+                    // Trier les utilisateurs par le poids de leurs récoltes
+                    $topUsers = $users->sortByDesc(function ($user) {
+                        return $user->fields->flatMap->harvests->sum('weight_coton');
+                    })->take(3);
+
+                    // Ajouter les résultats pour ce department
+                    $result[] = [
+                        'department' => $department,
+                        'totalWeight' => $totalWeight,
+                        'topUsers' => $topUsers
+                    ];
+                }
+
+                // Logique pour récupérer les utilisateurs
+                return self::apiResponse(true, "Utilisateurs récupérés avec succès", $result);
+            } catch (\Exception $e) {
+                return self::apiResponse(false, "Échec de la récupération des utilisateurs: " . $e->getMessage(), null, 500);
+            }
+        }
+
+
+
+        public function best_gv(Request $request)
+        {
+            try {
+                // Récupérer tous les utilisateurs avec leurs champs et récoltes
+                $users = User::with('fields.harvests')->get();
+
+                // Grouper les utilisateurs par borough
+                $usersByneighborhood = $users->groupBy('neighborhood');
+
+                // Initialiser le tableau des résultats
+                $result = [];
+
+                // Calculer le poids total des récoltes par neighborhood et trier les utilisateurs
+                foreach ($usersByneighborhood as $neighborhood => $users) {
+                    $totalWeight = $users->sum(function ($user) {
+                        return $user->fields->flatMap->harvests->sum('weight_coton');
+                    });
+
+                    // Trier les utilisateurs par le poids de leurs récoltes
+                    $topUsers = $users->sortByDesc(function ($user) {
+                        return $user->fields->flatMap->harvests->sum('weight_coton');
+                    })->take(3);
+
+                    // Ajouter les résultats pour ce neighborhood
+                    $result[] = [
+                        'neighborhood' => $neighborhood,
+                        'totalWeight' => $totalWeight,
+                        'topUsers' => $topUsers
+                    ];
+                }
+
+                // Logique pour récupérer les utilisateurs
+                return self::apiResponse(true, "Utilisateurs récupérés avec succès", $result);
+            } catch (\Exception $e) {
+                return self::apiResponse(false, "Échec de la récupération des utilisateurs: " . $e->getMessage(), null, 500);
+            }
+        }
+
+
+      public function calculateTotalWeightAndTopFarmersNational()
+        {
+            // Récupérer tous les utilisateurs avec leurs champs et récoltes
+            $users = User::with('fields.harvests')->get();
+
+            // Calculer le poids total des récoltes de tous les utilisateurs
+            $totalWeightAllUsers = $users->sum(function ($user) {
+                return $user->fields->flatMap->harvests->sum('weight_coton');
+            });
+
+            // Trier les utilisateurs par le poids de leurs récoltes
+            $topFarmersNational = $users->sortByDesc(function ($user) {
+                return $user->fields->flatMap->harvests->sum('weight_coton');
+            })->take(3);
+
+            return [
+                'totalWeightAllUsers' => $totalWeightAllUsers,
+                'topFarmersNational' => $topFarmersNational
+            ];
+        }
+
+        
+        public function best_general(Request $request)
+        {
+            try {
+                // Calculer le poids total des récoltes de tous les utilisateurs et obtenir les trois meilleurs utilisateurs au niveau national
+                $generalStats = $this->calculateTotalWeightAndTopFarmersNational();
+
+                // Retourner les statistiques générales
+                return self::apiResponse(true, "Statistiques générales récupérées avec succès", $generalStats);
+            } catch (\Exception $e) {
+                return self::apiResponse(false, "Échec de la récupération des statistiques générales: " . $e->getMessage(), null, 500);
+            }
+        }
+
+
+
+
+
 
     /**
      * Get details of authenticated user.

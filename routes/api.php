@@ -25,6 +25,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login',[UserController::class,'loginUser']);
 Route::get('bilan',[UserController::class,'user_bilan']);
+Route::get('arrondissement',[UserController::class,'best_arrond']);
+Route::get('commune',[UserController::class,'best_comm']);
+Route::get('department',[UserController::class,'best_depart']);
+Route::get('groupement',[UserController::class,'best_gv']);
+Route::get('general',[UserController::class,'best_general']);
+
 
 
 
